@@ -231,10 +231,11 @@ jobs:
               ssh $SSH_OPT $HOST tar xzf ./criterion.tgz ||
               echo "No previous results cached"
             for bench in ./$CIRCLE_BUILD_NUM/*; do
+              echo $bench
               # Note: works better if gnuplot is installed on the machine
               ssh $SSH_OPT $HOST $bench --color always
             done
-            ssh $SSH_OPT $HOST tar czf ./criterion.tgz ./target/criterion
+            ssh $SSH_OPT $HOST tar czf ./criterion.tgz ./target
             scp $SSH_OPT -r $HOST:~/criterion.tgz .
             ssh $SSH_OPT $HOST rm -r ./$CIRCLE_BUILD_NUM ./target ./criterion.tgz
       - persist_to_workspace:
