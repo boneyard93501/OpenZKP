@@ -234,10 +234,8 @@ jobs:
               echo $bench
               # Note: works better if gnuplot is installed on the machine
               ssh $SSH_OPT $HOST $bench --color always
-              echo "ls"
-              ssh $SSH_OPT $HOST ls
-              echo "ls *"
-              ssh $SSH_OPT $HOST ls *
+              echo "ls /$CIRCLE_BUILD_NUM"
+              ssh $SSH_OPT $HOST ls /$CIRCLE_BUILD_NUM
             done
             ssh $SSH_OPT $HOST tar czf ./criterion.tgz .
             scp $SSH_OPT -r $HOST:~/criterion.tgz .
